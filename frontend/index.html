@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+        <!-- <link rel="stylesheet" href="https://cdn.shoelace.style/1.0.0-beta24/shoelace.css"> -->
+        <link rel="stylesheet" href="style/styles.css">
+    </head>
+
+    <body>
+        <div class = "container">
+        <header class="jumbotron">
+            <h1><span><svg class="bi bi-camera" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 5C7.343 5 5 6.343 5 8a4 4 0 014-4v1z"/>
+                <path fill-rule="evenodd" d="M14.333 3h-2.015A5.97 5.97 0 009 2a5.972 5.972 0 00-3.318 1H1.667C.747 3 0 3.746 0 4.667v6.666C0 12.253.746 13 1.667 13h4.015c.95.632 2.091 1 3.318 1a5.973 5.973 0 003.318-1h2.015c.92 0 1.667-.746 1.667-1.667V4.667C16 3.747 15.254 3 14.333 3zM1.5 5a.5.5 0 100-1 .5.5 0 000 1zM9 13A5 5 0 109 3a5 5 0 000 10z" clip-rule="evenodd"/>
+                <path d="M2 3a1 1 0 011-1h1a1 1 0 010 2H3a1 1 0 01-1-1z"/>
+              </svg></span>
+               Welcome to Photo Search!</h1>
+            <!-- <p>Search for photos</p> -->
+            <!-- <form class="form-inline" action="#" method="GET"> -->
+
+            <!-- not submit the form -->
+            <div id="error" class="isa_error"></div>
+            <form class="form-inline" action = "" onsubmit ="return searchPhoto();" >
+              <div class="form-group has-feedback">
+                <!-- <label for="search"></label> -->
+               <input id="query" name="query" class="form-control" type="text"  placeholder="Search photos with labels" autocomplete="off">
+                <button type = "submit" class="btn btn-info"> <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
+                  </svg></button>
+                  <button type="button" id="micButton" class="btn btn-primary" style="display: inline-block;">
+                    <span>
+                        <svg class="bi bi-mic-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 3a3 3 0 016 0v5a3 3 0 01-6 0V3z"/>
+                            <path fill-rule="evenodd" d="M3.5 6.5A.5.5 0 014 7v1a4 4 0 008 0V7a.5.5 0 011 0v1a5 5 0 01-4.5 4.975V15h3a.5.5 0 010 1h-7a.5.5 0 010-1h3v-2.025A5 5 0 013 8V7a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                          </svg>
+                    </span>
+                </button>
+               
+            </div>
+            </form>
+    
+
+            <!-- test for speech search -->
+            <!-- <textarea id="transcript" placeholder="Press Start and speak into your mic" rows="5"
+            readonly="readonly"></textarea> -->
+        <div class="row" id = "micButtonGroups" style="display:none">
+            <div class="col">
+                <button id="start-button" class="button-xl" title="Start Transcription">
+                    <i class="fa fa-microphone"></i> Start
+                </button>
+            
+                <button id="stop-button" class="button-xl" title="Stop Transcription" disabled="true"><i
+                        class="fa fa-stop-circle"></i> Stop
+                </button>
+                <button id="reset-button" class="button-xl button-secondary" title="Clear Transcript"> 
+                    Clear Transcript
+                </button>
+            </div>
+        </div>
+
+            <hr>
+            <a class="pull-right" href="upload.html">
+                <svg class="bi bi-cloud-upload" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.887 6.2l-.964-.165A2.5 2.5 0 103.5 11H6v1H3.5a3.5 3.5 0 11.59-6.95 5.002 5.002 0 119.804 1.98A2.501 2.501 0 0113.5 12H10v-1h3.5a1.5 1.5 0 00.237-2.981L12.7 7.854l.216-1.028a4 4 0 10-7.843-1.587l-.185.96z"/>
+                    <path fill-rule="evenodd" d="M5 8.854a.5.5 0 00.707 0L8 6.56l2.293 2.293A.5.5 0 1011 8.146L8.354 5.5a.5.5 0 00-.708 0L5 8.146a.5.5 0 000 .708z" clip-rule="evenodd"/>
+                    <path fill-rule="evenodd" d="M8 6a.5.5 0 01.5.5v8a.5.5 0 01-1 0v-8A.5.5 0 018 6z" clip-rule="evenodd"/>
+                  </svg>
+              Upload New photos
+            </a>
+          </header>
+
+        <div id = "photoContainer" class="row text-center" style="display: flex; flex-wrap: wrap; margin-left: 0px; margin-right:0px;">
+        </div>
+        </div>
+
+<script type="text/javascript" src="js/lib/axios/dist/axios.standalone.js"></script>
+<script type="text/javascript" src="js/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+<script type="text/javascript" src="js/lib/CryptoJS/rollups/sha256.js"></script>
+<script type="text/javascript" src="js/lib/CryptoJS/components/hmac.js"></script>
+<script type="text/javascript" src="js/lib/CryptoJS/components/enc-base64.js"></script>
+<script type="text/javascript" src="js/lib/url-template/url-template.js"></script>
+<script type="text/javascript" src="js/lib/apiGatewayCore/sigV4Client.js"></script>
+<script type="text/javascript" src="js/lib/apiGatewayCore/apiGatewayClient.js"></script>
+<script type="text/javascript" src="js/lib/apiGatewayCore/simpleHttpClient.js"></script>
+<script type="text/javascript" src="js/lib/apiGatewayCore/utils.js"></script>
+<script type="text/javascript" src="js/apigClient.js"></script>
+
+<!-- for mic part -->
+
+<script type="text/javascript">
+    // ***Note to delete if upload to a public library***
+    var apigClient = apigClientFactory.newClient({
+        // accessKey: 'AKIAX2B7KX4ZPKF2GQMO',
+        // secretKey: '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'
+        apiKey:'StQriXyxBd2Q4E7EQ6gpO8E3K7LXHeHw3VS4xhyo'
+    });
+    var errorBox = document.getElementById("error");
+    errorBox.style.display="none"
+    function searchPhoto(){
+        var inputBox = document.getElementById("query")
+        var query = inputBox.value;
+        // var errorBox = document.getElementById("error");s
+        errorBox.style.display="none"
+        errorBox.innerHTML=''
+        if ( query == "" || query == null || query == undefined){
+            errorBox.innerHTML = "<i class=\"fa fa-times-circle\"></i> <p>Please enter the query. <br> Example: Search for nature. </p>";
+            errorBox.style.display="block"
+            return false;
+        }
+        var photoContainer = document.getElementById("photoContainer")
+        // reset html 
+        photoContainer.innerHTML = ''
+        
+        console.log(query);
+        paras = {
+            "q": query
+        };
+        resPromise = apigClient.searchGet(paras);
+        console.log(resPromise);
+        resPromise.then(
+            function showPicture(value){
+                console.log(value)
+                if ('data' in value && 'results' in value['data']){
+                // console.log(value['data']['results'])
+                    // var photoContainer = document.getElementById("photoContainer")
+                    var containerHTML = photoContainer.innerHTML;
+                    for (var i = 0, len = value['data']['results'].length; i < len; i++){
+                        photo = value['data']['results'][i]
+                        console.log(photo)
+                        var labels = photo['labels'];
+                        var labelString = " "
+                        for (var j = 0; j < labels.length; j ++){
+                            labelString+= labels[j] 
+                            if (j != labels.length - 1){
+                                labelString += ", "
+                            }
+                        }
+                        console.log(labelString)
+                        var photoUrl = photo['url'];
+                        console.log(photoUrl)
+                        containerHTML+='<div class="col-md-3 col-sm-6" style = "padding-left: 0px">\
+                                        <div class="thumbnail card">\
+                                        <img style = "height: 200px;" src="' + photoUrl + '">\
+                                        <div class="caption"> \
+                                            <h5 class="caption"> Labels: </h5> \
+                                            <p>' + labelString+ '</p>\
+                                        </div>\
+                                        </div>\
+                                    </div>';
+                    }
+                    // console.log(containerHTML.length)
+                    if (containerHTML.length == 0){
+                        containerHTML = '<div class="caption"><h4>Photos not found.</h4></div>'
+                    }
+                    photoContainer.innerHTML = containerHTML
+                    // Set the value to be None
+                    inputBox.value = ""
+
+                }else{
+                    console.log("Possible errors");
+                    console.log(value);
+                }
+            }
+        ).catch(function onRejected(error){
+            console.log(error)
+        })
+        return false;
+    }
+
+</script>    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="dist/main.js"></script>
+</body>
+</html>
