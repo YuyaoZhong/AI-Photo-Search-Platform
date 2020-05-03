@@ -36,10 +36,10 @@ Resources:
       Timeout: 30
       Role: 'arn:aws:iam::604154134957:role/codepipeline_lambda'
       Events:
-        getAZsAPI:
+        getAYsAPI:
           Type: Api
           Properties:
-            Path: /getazs
+            Path: /getays
             Method: get
       Environment:
         Variables:
