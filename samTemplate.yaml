@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: photoAlbumApp
 Resources:
-  photoAlbumApp-LF1:
+  photoAlbumApp1:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: photoAlbumApp-LF1
@@ -24,7 +24,7 @@ Resources:
           REGION: us-east-1
 
 
-  photoAlbumApp-LF2:
+  photoAlbumApp2:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: photoAlbumApp-LF2
