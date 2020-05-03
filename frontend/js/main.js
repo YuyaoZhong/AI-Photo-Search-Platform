@@ -4,7 +4,7 @@ const v4                = require('./aws-signature-v4'); // to generate our pre-
 const marshaller        = require("@aws-sdk/eventstream-marshaller"); // for converting binary event stream messages to and from JSON
 const util_utf8_node    = require("@aws-sdk/util-utf8-node"); // utilities for encoding and decoding UTF8
 const mic               = require('microphone-stream'); // collect microphone input as a stream of raw bytes
-const fs                = require('fs');
+// const fs                = require('fs');
 
 // our converter between binary event streams messages and JSON
 const eventStreamMarshaller = new marshaller.EventStreamMarshaller(util_utf8_node.toUtf8, util_utf8_node.fromUtf8);
@@ -183,47 +183,6 @@ $('#reset-button').click(function (){
     $('#query').val('');
     transcription = '';
 });
-
-$('#upload-button').click(function (){
-    console.log("hhhhhhhhhhhhhhhhhhhh");
-    uploadImage();
-});
-
-
-function uploadImage() {
-    if (window.image) {
-        console.log("hello world");
-        console.log(window.image);
-        var apigClient = apigClientFactory.newClient({
-            // accessKey: 'AKIAX2B7KX4ZPKF2GQMO',
-            // secretKey: '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'
-            apiKey: 'StQriXyxBd2Q4E7EQ6gpO8E3K7LXHeHw3VS4xhyo'
-        });
-        var toUploadImage = window.image;
-        var imageData = window.imageData;
-        const fs = require('file-system');
-
-        var fileStream = fs.createReadStream(toUploadImage.name);
-        // var data = fs.readFileSync(toUploadImage.name);
-        var params = {
-            "folder": "photo-album-app-b2",
-            "item": toUploadImage.name,
-            "Content-Type": toUploadImage.type,
-            "ACL": "public-read",
-        }
-        console.log(params);
-        console.log("here");
-        // var fs = require('fs');
-        // fs.createReadStream(toUploadImage.name);
-        // console.log(imageData);
-        // // imageData = imageData.replace(/^data:image\/\w+;base64,/, ""),'base64';
-        // console.log(imageData);
-        let res = apigClient.uploadFolderItemPut(params, toUploadImage);
-        // console.log(res);
-    } else {
-        alert("Please choose uploaded image first!");
-    }
-}
 
 function toggleStartStop(disableStart = false) {
     $('#start-button').prop('disabled', disableStart);

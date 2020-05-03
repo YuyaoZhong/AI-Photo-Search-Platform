@@ -19,7 +19,7 @@
                     Browse... <input type="file" id="imgInp">
                 </span>
                 <span>
-                    <button type="button" id= "upload-button" class="btn btn-primary">Upload</button>
+                    <button type="button" id= "upload-button" class="btn btn-primary" onclick="uploadImage()">Upload</button>
                 </span>
             </span>
                     <input type="text" class="form-control" readonly>
@@ -54,7 +54,7 @@
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
-                        window.imageData = e.target.result;
+                        // window.imageData = e.target.result;
                         $('#img-upload').attr('src', e.target.result);
                     }
                     window.image = input.files[0];
@@ -71,100 +71,26 @@
 
 
     <script type="text/javascript" src="js/lib/axios/dist/axios.standalone.js"></script>
-    <script type="text/javascript" src="js/lib/CryptoJS/rollups/hmac-sha256.js"></script>
-    <script type="text/javascript" src="js/lib/CryptoJS/rollups/sha256.js"></script>
-    <script type="text/javascript" src="js/lib/CryptoJS/components/hmac.js"></script>
-    <script type="text/javascript" src="js/lib/CryptoJS/components/enc-base64.js"></script>
-    <script type="text/javascript" src="js/lib/url-template/url-template.js"></script>
-    <script type="text/javascript" src="js/lib/apiGatewayCore/sigV4Client.js"></script>
-    <script type="text/javascript" src="js/lib/apiGatewayCore/apiGatewayClient.js"></script>
-    <script type="text/javascript" src="js/lib/apiGatewayCore/simpleHttpClient.js"></script>
-    <script type="text/javascript" src="js/lib/apiGatewayCore/utils.js"></script>
-    <script type="text/javascript" src="js/apigClient.js"></script>
-    <script type="text/javascript" src="dist/main.js"></script>
-<!--    <script type="text/javascript" src="js/bundle.js"></script>-->
 
-<!--    <script type="text/javascript" src="js/processUpload.js"></script>-->
 
     <script type="text/javascript">
         function uploadImage() {
             if (window.image) {
+                var files = window.image;
+                let config = {
+                    headers:{'Content-Type': files.type , "X-Api-Key":"6s8nykoba4", }
+                };
 
-                var albumBucketName = "photo-album-app-b2";
-                var bucketRegion = "us-east-1";
-                var IdentityPoolId = "IDENTITY_POOL_ID";
-
-                AWS.config.update({
-                    region: bucketRegion,
-                    accessKeyId: 'AKIAX2B7KX4ZPKF2GQMO',
-                    secretAccessKey: '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',
-                });
-
-                var s3 = new AWS.S3({
-                    params: { Bucket: albumBucketName }
-                });
-
-
-                console.log("hello world");
-                console.log(window.image);
-                // var apigClient = apigClientFactory.newClient({
-                //     // accessKey: 'AKIAX2B7KX4ZPKF2GQMO',
-                //     // secretKey: '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'
-                //     apiKey: 'StQriXyxBd2Q4E7EQ6gpO8E3K7LXHeHw3VS4xhyo'
-                // });
-                var toUploadImage = window.image;
-                var imageData = window.imageData;
-
-
-
-                // var upload = new AWS.S3.ManagedUpload({
-                //     params: {
-                //         Bucket: albumBucketName,
-                //         Key: toUploadImage.name,
-                //         Body: toUploadImage,
-                //         ACL: "public-read",
-                //     }
-                // });
-                //
-                // var promise = upload.promise();
-                //
-                // promise.then(
-                //     function(data) {
-                //         alert("Successfully uploaded photo.");
-                //         // viewAlbum(albumName);
-                //     },
-                //     function(err) {
-                //         return alert("There was an error uploading your photo: ", err.message);
-                //     }
-                // );
-
-                // imageData = imageData.replace(/^data:image\/\w+;base64,/, ""),'base64';
-                // // imageData = imageData.blob();
-                // data = base64toBlob(imageData, toUploadImage.type);
-                //
-                // console.log(data);
-                // var params = {
-                //     "folder": "photo-album-app-b2",
-                //     "item": toUploadImage.name,
-                //     "Content-Type": toUploadImage.type,
-                //     "ACL": "public-read",
-                //     'body': imageData,
-                // }
-                // console.log(params);
-                // console.log("here");
-                // // var fs = require('fs');
-                fs.createReadStream(toUploadImage.name);
-                //
-                // // console.log(imageData);
-                // // // imageData = imageData.replace(/^data:image\/\w+;base64,/, ""),'base64';
-                // // console.log(imageData);
-                // res = apigClient.uploadFolderItemPut(params, imageData);
-                // console.log(res);
+                url = 'https://khgb4zn87i.execute-api.us-east-1.amazonaws.com/photos/upload/photo-album-app-b2/' + files.name
+                axios.put(url,files,config).then(response=>{
+                    // console.log(response.data)
+                    alert("Upload successful!!");
+                })
             } else {
                 alert("Please choose uploaded image first!");
             }
         }
     </script>
-
-
 </html>
+
+
