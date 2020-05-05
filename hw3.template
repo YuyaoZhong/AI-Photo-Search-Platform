@@ -1,0 +1,298 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Metadata": {
+        "AWS::CloudFormation::Designer": {
+            "17a96e49-4706-4c2b-a329-ece134ad6f02": {
+                "size": {
+                    "width": 140,
+                    "height": 140
+                },
+                "position": {
+                    "x": 70,
+                    "y": 100
+                },
+                "z": 0,
+                "embeds": []
+            },
+            "935295a5-e2f5-482f-b4e4-98a9b4d38ebc": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 260,
+                    "y": 50
+                },
+                "z": 0,
+                "dependson": [
+                    "17a96e49-4706-4c2b-a329-ece134ad6f02"
+                ]
+            },
+            "a69243c4-ce7e-4338-8366-7d32cbd1857c": {
+                "source": {
+                    "id": "935295a5-e2f5-482f-b4e4-98a9b4d38ebc"
+                },
+                "target": {
+                    "id": "17a96e49-4706-4c2b-a329-ece134ad6f02"
+                },
+                "z": 1
+            },
+            "6f8a3eb4-b7be-4e1f-9a68-bd7b5786282f": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 260,
+                    "y": 210
+                },
+                "z": 0,
+                "dependson": [
+                    "17a96e49-4706-4c2b-a329-ece134ad6f02"
+                ]
+            },
+            "bba68467-31ca-4ded-98e1-cfeb573f201c": {
+                "source": {
+                    "id": "6f8a3eb4-b7be-4e1f-9a68-bd7b5786282f"
+                },
+                "target": {
+                    "id": "17a96e49-4706-4c2b-a329-ece134ad6f02"
+                },
+                "z": 2
+            },
+            "0e91e2b8-34e5-4979-a6cf-04a5f197a769": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 260,
+                    "y": 130
+                },
+                "z": 0,
+                "dependson": [
+                    "17a96e49-4706-4c2b-a329-ece134ad6f02"
+                ]
+            },
+            "464ff309-2f5b-4513-9a4b-e0a340ed5e58": {
+                "source": {
+                    "id": "0e91e2b8-34e5-4979-a6cf-04a5f197a769"
+                },
+                "target": {
+                    "id": "17a96e49-4706-4c2b-a329-ece134ad6f02"
+                },
+                "z": 3
+            },
+            "4c4916fe-28f4-4803-916a-3d2dac28a442": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 260,
+                    "y": 290
+                },
+                "z": 0,
+                "dependson": [
+                    "17a96e49-4706-4c2b-a329-ece134ad6f02"
+                ]
+            },
+            "de14d0b5-703d-47af-bb59-e0b5a5217399": {
+                "source": {
+                    "id": "4c4916fe-28f4-4803-916a-3d2dac28a442"
+                },
+                "target": {
+                    "id": "17a96e49-4706-4c2b-a329-ece134ad6f02"
+                },
+                "z": 4
+            },
+            "a043a9c7-8b53-4d92-96bd-dae6581f203e": {
+                "size": {
+                    "width": 140,
+                    "height": 140
+                },
+                "position": {
+                    "x": 370,
+                    "y": 100
+                },
+                "z": 0,
+                "dependson": [
+                    "0e91e2b8-34e5-4979-a6cf-04a5f197a769",
+                    "4c4916fe-28f4-4803-916a-3d2dac28a442",
+                    "935295a5-e2f5-482f-b4e4-98a9b4d38ebc",
+                    "25657ed2-75a1-4209-9f8d-5acdcf363345"
+                ]
+            },
+            "5a75b2f5-fc0d-4df4-8f06-124fd703b85c": {
+                "source": {
+                    "id": "a043a9c7-8b53-4d92-96bd-dae6581f203e"
+                },
+                "target": {
+                    "id": "0e91e2b8-34e5-4979-a6cf-04a5f197a769"
+                },
+                "z": 5
+            },
+            "31369250-1ed2-4bf8-877c-61af7bcbca70": {
+                "source": {
+                    "id": "a043a9c7-8b53-4d92-96bd-dae6581f203e"
+                },
+                "target": {
+                    "id": "4c4916fe-28f4-4803-916a-3d2dac28a442"
+                },
+                "z": 6
+            },
+            "6c1a1df2-6d0a-4edb-bc04-60333de64e80": {
+                "source": {
+                    "id": "a043a9c7-8b53-4d92-96bd-dae6581f203e"
+                },
+                "target": {
+                    "id": "935295a5-e2f5-482f-b4e4-98a9b4d38ebc"
+                },
+                "z": 7
+            },
+            "25657ed2-75a1-4209-9f8d-5acdcf363345": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 260,
+                    "y": -30
+                },
+                "z": 0
+            },
+            "51fab1a5-fb52-43a0-ac6c-cb19c5eabbfd": {
+                "source": {
+                    "id": "a043a9c7-8b53-4d92-96bd-dae6581f203e"
+                },
+                "target": {
+                    "id": "25657ed2-75a1-4209-9f8d-5acdcf363345"
+                },
+                "z": 8
+            },
+            "8c502dde-1046-4cd4-ac56-85e91da125ae": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 540,
+                    "y": 70
+                },
+                "z": 0
+            },
+            "7e0e9161-d4e7-472f-9112-51462582dc25": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 540,
+                    "y": 170
+                },
+                "z": 0
+            }
+        }
+    },
+    "Resources": {
+        "EC2VPC32XZ6": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "17a96e49-4706-4c2b-a329-ece134ad6f02"
+                }
+            }
+        },
+        "S3B4NS6C": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "935295a5-e2f5-482f-b4e4-98a9b4d38ebc"
+                }
+            },
+            "DependsOn": [
+                "EC2VPC32XZ6"
+            ]
+        },
+        "ED4SBLN": {
+            "Type": "AWS::Elasticsearch::Domain",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "6f8a3eb4-b7be-4e1f-9a68-bd7b5786282f"
+                }
+            },
+            "DependsOn": [
+                "EC2VPC32XZ6"
+            ]
+        },
+        "LFMRUS": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "0e91e2b8-34e5-4979-a6cf-04a5f197a769"
+                }
+            },
+            "DependsOn": [
+                "EC2VPC32XZ6"
+            ]
+        },
+        "LF6HV1": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "4c4916fe-28f4-4803-916a-3d2dac28a442"
+                }
+            },
+            "DependsOn": [
+                "EC2VPC32XZ6"
+            ]
+        },
+        "AGRA4DND7": {
+            "Type": "AWS::ApiGateway::RestApi",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "a043a9c7-8b53-4d92-96bd-dae6581f203e"
+                }
+            },
+            "DependsOn": [
+                "LFMRUS",
+                "LF6HV1",
+                "S3B4NS6C",
+                "S3B4S9B7"
+            ]
+        },
+        "S3B4S9B7": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "25657ed2-75a1-4209-9f8d-5acdcf363345"
+                }
+            }
+        },
+        "CPP155EU": {
+            "Type": "AWS::CodePipeline::Pipeline",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "8c502dde-1046-4cd4-ac56-85e91da125ae"
+                }
+            }
+        },
+        "CPP5BG7T": {
+            "Type": "AWS::CodePipeline::Pipeline",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "7e0e9161-d4e7-472f-9112-51462582dc25"
+                }
+            }
+        }
+    }
+}
