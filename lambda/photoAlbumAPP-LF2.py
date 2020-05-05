@@ -10,7 +10,7 @@ index_name = "photos"
 headers  ={
         "content-type": "application/json"
     }
-visited_imgs = {} # use to removed for mutliple queries
+# visited_imgs = {} # use to removed for mutliple queries
 
 def search_in_es(query):
     search_url = es_url + index_name + '/_search'
@@ -29,7 +29,7 @@ def search_in_es(query):
     if "hits" not in response or "hits" not in response["hits"]: return []
     results = response["hits"]["hits"]
     if len(results) == 0: return []
-    # visited_imgs = {}
+    visited_imgs = {}
     imgs = []
     for res in results:
         if "_source" not in res: continue
@@ -108,7 +108,8 @@ def lambda_handler(event, context):
                 botName= BOT_NAME,
                 botAlias='demoa',
                 userId='userTest111',
-                inputStream= q,
+                inputStream= str(q),
+                accept = "text/plain; charset=utf-8",
                 contentType = 'text/plain; charset=utf-8')
 
     except e:
@@ -135,13 +136,12 @@ def lambda_handler(event, context):
     # reference for the url
     # imgUrl = "https://%s.s3.amazonaws.com/%s" % (photo_info["bucket_name"], photo_info["objectKey"])
     res = []
-    # visited_imgs = {}
     if qa:
         imgs_a = search_in_es(qa)
         print(imgs_a)
         res.extend(imgs_a)
     if qb:
-        imgs_b = search_in_es(qb)
+        imgs_b  = search_in_es(qb)
         print(imgs_b)
         res.extend(imgs_b)
 
