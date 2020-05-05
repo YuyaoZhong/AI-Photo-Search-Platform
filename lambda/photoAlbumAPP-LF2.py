@@ -10,12 +10,16 @@ index_name = "photos"
 headers  ={
         "content-type": "application/json"
     }
+visited_imgs = {} # use to removed for mutliple queries
+
 def search_in_es(query):
     search_url = es_url + index_name + '/_search'
+ 
     es_query = {
           "query": {
             "match": {
-              "labels": query 
+              "labels": query,
+            #   "fuzziness": 2
             }
           }
         }
@@ -25,7 +29,7 @@ def search_in_es(query):
     if "hits" not in response or "hits" not in response["hits"]: return []
     results = response["hits"]["hits"]
     if len(results) == 0: return []
-    visited_imgs = {}
+    # visited_imgs = {}
     imgs = []
     for res in results:
         if "_source" not in res: continue
@@ -62,9 +66,11 @@ def search_in_es(query):
         imgs.append(photo)
     return imgs
 
-def error_response(error_code):
+def error_response(error_code, message = None):
+    if not message:
+        message = "execution error. check the input parameters of query."
     body ={
-        "message": "execution error. check the input parameters of query."
+        "message": message
     }
     response = {
         "statusCode": error_code,
@@ -79,6 +85,7 @@ def error_response(error_code):
     return response
     
 def lambda_handler(event, context):
+    print(event)
     if "queryStringParameters" not in event:
         return error_response(500)
     q_paras = event["queryStringParameters"]
@@ -92,18 +99,33 @@ def lambda_handler(event, context):
                       aws_secret_access_key=SECRET_KEY)
                       
     try:
-        response = client.post_text(
-        botName= BOT_NAME,
-        botAlias='demo',
-        userId='userTest111',
-        inputText= q)
+        # response = client.post_content(
+        # botName= BOT_NAME,
+        # botAlias='demoa',
+        # userId='userTest111',
+        # contentType = 'text/plain')
+        response = client.post_content(
+                botName= BOT_NAME,
+                botAlias='demoa',
+                userId='userTest111',
+                inputStream= q,
+                contentType = 'text/plain; charset=utf-8')
+
     except e:
         print(e)
-        return
+        return error_response(500, e)
     print(response)
-    if "slots" not in response: return []
-    qa, qb = response["slots"]["qa"], response["slots"]["qb"]
-    if not qa and not qb: return []
+    if "slots" not in response: return error_response(500, "slots not in response")
+    if "qa" not in response["slots"] and "qb" not in response["slots"]:
+         return error_response(403, "Lex does not recognize. The response from Lex "+ str(response))
+    # qa, qb = response["slots"]["qa"], response["slots"]["qb"]
+    qa, qb = None, None
+    if "qa" in response["slots"]:
+        qa = response["slots"]["qa"]
+    if "qb" in response["slots"]:
+        qb = response["slots"]["qb"]
+    if not qa and not qb: 
+        return error_response(403, "Both qa and qb is empty.")
     
     
     # query for all results
@@ -113,12 +135,17 @@ def lambda_handler(event, context):
     # reference for the url
     # imgUrl = "https://%s.s3.amazonaws.com/%s" % (photo_info["bucket_name"], photo_info["objectKey"])
     res = []
+    # visited_imgs = {}
     if qa:
         imgs_a = search_in_es(qa)
         print(imgs_a)
         res.extend(imgs_a)
- 
-    body = {"results":res}
+    if qb:
+        imgs_b = search_in_es(qb)
+        print(imgs_b)
+        res.extend(imgs_b)
+
+    body = {"results": res}
     response = {
         "statusCode": 200,
         "headers":{

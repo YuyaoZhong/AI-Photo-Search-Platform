@@ -70,17 +70,22 @@ def lambda_handler(event, context):
         if 'object' not in record['s3']: continue
         object_name = record['s3']['object']['key']
         print(bucket_name, object_name)
+        # s3_photo = { 
+        #     'Bucket': bucket_name,
+        #     'Name': object_name,
+        # }
         response = rek.detect_labels(
         Image={
             'S3Object': {
                 'Bucket': bucket_name,
                 'Name': object_name,
             }
+            # 'S3Object': s3_photo
         }, MinConfidence = 85)
         labels = []
         if 'Labels' not in response: return
         for label in response['Labels']:
-            labels.append(label['Name'])
+            labels.append(label['Name'].lower())
         print(labels)
         dt = datetime.datetime.utcnow()
         str_time = dt.strftime('%Y-%m-%d %H:%M:%S')
