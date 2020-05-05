@@ -61,6 +61,18 @@
         </div>
 
             <hr>
+            <div>
+                <h5>Sample Labels:</h5>
+                <div id = "labelContainer">text, nature, paper, computer, water, river, furniture...</div>
+                <h5>Sample Query:</h5>
+                <ul>
+                    <li>nature</li>
+                    <li>I want to see some computer and water</li>
+                    <li>Search for flower</li>
+                    <li>Show me furniture and paper</li>
+                    <li>find nature and river</li>
+                </ul>
+            </div>
             <a class="pull-right" href="upload.html">
                 <svg class="bi bi-cloud-upload" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.887 6.2l-.964-.165A2.5 2.5 0 103.5 11H6v1H3.5a3.5 3.5 0 11.59-6.95 5.002 5.002 0 119.804 1.98A2.501 2.501 0 0113.5 12H10v-1h3.5a1.5 1.5 0 00.237-2.981L12.7 7.854l.216-1.028a4 4 0 10-7.843-1.587l-.185.96z"/>
@@ -70,7 +82,7 @@
               Upload New photos
             </a>
           </header>
-
+        
         <div id = "photoContainer" class="row text-center" style="display: flex; flex-wrap: wrap; margin-left: 0px; margin-right:0px;">
         </div>
         </div>
@@ -115,7 +127,8 @@
         
         console.log(query);
         paras = {
-            "q": query
+            "q": query,
+           
         };
         resPromise = apigClient.searchGet(paras);
         console.log(resPromise);
@@ -165,11 +178,34 @@
             }
         ).catch(function onRejected(error){
             console.log(error)
+            containerHTML = '<div class="caption"><h4>Photos not found.</h4></div>'
+            photoContainer.innerHTML = containerHTML
         })
         return false;
     }
 
-</script>    
+</script>   
+ <!-- MODIFIED TEST HERE -->
+<!-- <script type="text/javascript" src="js/lib/axios/dist/axios.standalone.js"></script>
+
+
+<script type="text/javascript">
+    function get_images() {
+        axios.defaults.headers.post['Content-Type'] = 'text/plain;charset=UTF-8'
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] ='*'
+        axios.get("https://photo-album-app-b2.s3.amazonaws.com/labels_record.txt").then(
+            response=>{
+                var labelContainer= document.getElementById("labelContainer")
+                const labels = response.data
+                labelContainer.innerHTML = labels
+                // var label_arr = labels.split(" ")
+
+            }
+        )
+    }
+    get_images()
+</script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="dist/main.js"></script>
 </body>
