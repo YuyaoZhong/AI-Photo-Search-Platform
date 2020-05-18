@@ -2,8 +2,8 @@ import json
 import boto3
 import requests
 
-ACCESS_KEY = "AKIAX2B7KX4ZPKF2GQMO"
-SECRET_KEY = "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"
+ACCESS_KEY = "*******************"
+SECRET_KEY = "*********************************************************"
 BOT_NAME = "PhotoAlbumSearch"
 es_url = "https://vpc-photo-4rv6rs55az2276jgpwkzt7kz6y.us-east-1.es.amazonaws.com/"
 index_name = "photos"
